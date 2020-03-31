@@ -26,7 +26,7 @@ stages:
         containerRegistry: 'amirelgammal'
         repository: 'amirelgammal/testapi'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/TestApi/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/publish/TestApi/'
+        Dockerfile: '$(Build.SourcesDirectory)/testapi/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/publish/testapi/'
         tags: |
           $(imgTage)
