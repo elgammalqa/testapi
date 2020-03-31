@@ -3,7 +3,7 @@ WORKDIR /app
 
 # copy csproj and restore
 COPY TestApi/*.csproj ./testapi/
-RUN cd ./aspnetapp/ && dotnet restore 
+RUN cd ./testapi/ && dotnet restore 
 
 # copy all files and build
 COPY app/. ./testapi/
