@@ -1,10 +1,5 @@
 # Docker
-- task: Docker@2
-  inputs:
-    containerRegistry: 'amirelgamaml'
-    repository: 'testapi'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+
 # Build a Docker image 
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
@@ -33,3 +28,10 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+    - task: Docker@2
+      displayName: push an image
+      inputs:
+        containerRegistry: 'amirelgamaml'
+        repository: 'testapi'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
