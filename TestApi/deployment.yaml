@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: testapi
+  template:
+    metadata:
+      labels:
+        app: testapi
+    spec:
+      containers:
+      - name: testapi
+        image: testapi
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 5000
+            name: api-port
