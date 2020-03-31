@@ -3,13 +3,13 @@ environment: development
 apphost: k8s
 
 label:
-  name: aspnet3core
+  name: testapi3core
 
 container:
-  name: aspnet3
+  name: testapi3
   pullPolicy: IfNotPresent
-  image: aspnet3k8s
-  tag: v1
+  image: testapi
+  tag: v18
   port: 80
 
 replicas: 2
