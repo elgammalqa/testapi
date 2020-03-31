@@ -6,9 +6,9 @@ EXPOSE 5001
 # copy csproj and restore as distinct layers
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS build
 WORKDIR /TestApi
-COPY *.sln .
-COPY TestApi/*.csproj ./TestApi/
-RUN dotnet restore
+COPY ["TestApi.csproj", "./"]
+RUN dotnet restore "./TestApi.csproj"
+COPY . .
 
 # copy everything else and build app
 COPY TestApi/. ./TestApi/
