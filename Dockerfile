@@ -18,7 +18,7 @@ RUN groupadd -r ${GROUP} &&\
 # Restore packages
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS build
 WORKDIR /TestApi
-COPY ["TestApi.csproj", "./"]
+COPY ["./TestApi.csproj", "./"]
 RUN dotnet restore "./TestApi.csproj"
 COPY . .
 # WORKDIR "/TestApi/."
