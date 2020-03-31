@@ -9,7 +9,7 @@ container:
   name: testapi
   pullPolicy: IfNotPresent
   image: testapi
-  tag: v1
+  tag: v2
   port: 80
 
 replicas: 3
