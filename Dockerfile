@@ -6,7 +6,7 @@ COPY TestApi/*.csproj ./testapi/
 RUN cd ./testapi/ && dotnet restore 
 
 # copy all files and build
-COPY app/. ./testapi/
+COPY TestApi/. ./testapi/
 WORKDIR /app/testapi
 RUN dotnet publish -c Release -o out
 
