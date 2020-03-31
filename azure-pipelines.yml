@@ -68,7 +68,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'amirelgammal'
-        repository: 'testapi'
+        repository: 'amirelgammal/testapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
 
