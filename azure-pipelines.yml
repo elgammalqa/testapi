@@ -33,7 +33,7 @@ stages:
       displayName: 'dotnet test'
       inputs:
         command: 'test'
-        projects: '**/*Tests/*.csproj'
+        projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build'
         publishTestResults: true
 
