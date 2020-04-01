@@ -33,7 +33,7 @@ stages:
       displayName: 'dotnet test'
       inputs:
         command: 'test'
-        projects: '*.csproj'
+        projects: '**/*Tests/*.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build'
         publishTestResults: true
 
@@ -66,12 +66,8 @@ stages:
         targetPath: '$(Build.SourcesDirectory)/publish'
 
     - task: Docker@2
-      displayName: 'Docker build & push'
       inputs:
         containerRegistry: 'amirelgammal'
         repository: 'amirelgammal/testapi'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/publish/TestApi/'
-        tags: |
-          $(imgTage)
+        Dockerfile: '**/Dockerfile'

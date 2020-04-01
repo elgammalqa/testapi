@@ -1,19 +1,24 @@
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
 spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 2 # tells deployment to run 2 pods matching the template
+      tier: backend
+      track: stable
+  replicas: 2
   template:
     metadata:
       labels:
         app: nginx
+        tier: backend
+        track: stable
     spec:
       containers:
-      - name: nginx
-        image: nginx:v2
-        ports:
-        - containerPort: 80
+        - name: hello
+          image: nginx:v2
+          ports:
+            - name: http
+              containerPort: 80
