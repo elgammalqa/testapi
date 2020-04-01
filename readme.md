@@ -53,4 +53,4 @@ Task is to build and deploy into k8s cluster a distributed web api application
 > please go to Settings/Service connections* and add docker hub account to push the image to your docker hub.
 
 ___
-All above steps are tested and working propery , Please let me know if you need any help or any changes.
+All above steps are tested and working properly , Please let me know if you need any help or any changes.
