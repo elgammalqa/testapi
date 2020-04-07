@@ -33,7 +33,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    nodePort: 8000
+    nodePort: 30000
   type: NodePort
 ---
 apiVersion: apps/v1
