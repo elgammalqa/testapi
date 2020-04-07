@@ -39,7 +39,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: real-fileserver
+  name: fileserver
 spec:
   selector:
       matchLabels:
