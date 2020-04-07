@@ -1,39 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: real-webapi
+  name: webapi
 spec:
   selector:
       matchLabels:
-        app: real-webapi
+        app: webapi
   replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
-        app: real-webapi
+        app: webapi
     spec:
       containers:
-        - name: real-webapi
-          image: jaiseaugustine/webapi:latest
+        - name: webapi
+          image: testapi:v1
           ports:
             - containerPort: 80
           env:
            - name: NGINX
-             value: http://real-fileserver
+             value: http://localhost
   strategy:
     type: RollingUpdate              
 ---            
 kind: Service
 apiVersion: v1
 metadata:
-  name: real-webapi
+  name: webapi
 spec:
   selector:
-    app: real-webapi
+    app: webapi
   ports:
   - protocol: TCP
     port: 80
-    nodePort: 30001
+    nodePort: 8000
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -43,16 +43,16 @@ metadata:
 spec:
   selector:
       matchLabels:
-        app: real-fileserver
+        app: fileserver
   replicas: 1
   template:
     metadata:
       labels:
-        app: real-fileserver
+        app: fileserver
     spec:
       containers:
-        - name: real-fileserver
-          image: jaiseaugustine/file-server:latest
+        - name: fileserver
+          image: fileserver:v1
           ports:
             - containerPort: 80
   strategy:
@@ -61,10 +61,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: real-fileserver
+  name: fileserver
 spec:
   selector:
-    app: real-fileserver
+    app: fileserver
   ports:
   - protocol: TCP
     port: 80
