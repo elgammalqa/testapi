@@ -1,29 +1,71 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
-  labels:
-    app: {{ .Values.label.name }}
+  name: real-webapi
 spec:
-  replicas: {{ .Values.replicas }}
   selector:
-    matchLabels:
-      app: {{ .Values.label.name }}
+      matchLabels:
+        app: real-webapi
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
-        app: {{ .Values.label.name }}
-        environment: {{ .Values.environment }}
+        app: real-webapi
     spec:
       containers:
-        - name: {{ .Values.container.name }}
-          image: {{ .Values.container.image }}:{{ .Values.container.tag }}
-          imagePullPolicy: {{ .Values.container.pullPolicy }}
+        - name: real-webapi
+          image: jaiseaugustine/webapi:latest
           ports:
-            - containerPort: {{ .Values.container.port }}
+            - containerPort: 80
           env:
-            - name: apphost
-              value: {{ .Values.apphost }}
-            - name: appenvironment
-              value: {{ .Values.environment}}
-
+           - name: NGINX
+             value: http://real-fileserver
+  strategy:
+    type: RollingUpdate              
+---            
+kind: Service
+apiVersion: v1
+metadata:
+  name: real-webapi
+spec:
+  selector:
+    app: real-webapi
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 30001
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: real-fileserver
+spec:
+  selector:
+      matchLabels:
+        app: real-fileserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: real-fileserver
+    spec:
+      containers:
+        - name: real-fileserver
+          image: jaiseaugustine/file-server:latest
+          ports:
+            - containerPort: 80
+  strategy:
+    type: RollingUpdate
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: real-fileserver
+spec:
+  selector:
+    app: real-fileserver
+  ports:
+  - protocol: TCP
+    port: 80
+  type: ClusterIP
