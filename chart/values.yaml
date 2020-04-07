@@ -1,3 +1,4 @@
+  
 environment: development
 
 apphost: k8s
@@ -5,15 +6,4 @@ apphost: k8s
 label:
   name: testapi3core
 
-container:
-  name: testapi3
-  pullPolicy: IfNotPresent
-  image: testapi
-  tag: v18
-  port: 80
-
 replicas: 2
-
-service:
-  port: 8888
-  type: ClusterIP
