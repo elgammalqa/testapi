@@ -6,7 +6,7 @@ spec:
   selector:
       matchLabels:
         app: webapi
-  replicas: {{ .Values.replicas }}
+  replicas: 2
   template:
     metadata:
       labels:
