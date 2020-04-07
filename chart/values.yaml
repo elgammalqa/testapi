@@ -3,16 +3,16 @@ environment: development
 apphost: k8s
 
 label:
-  name: testapi3core
+  name: testapicore
 
 container:
-  name: testapi3
+  name: testapi
   pullPolicy: IfNotPresent
   image: testapi
-  tag: v18
+  tag: v1
   port: 80
 
-replicas: 2
+replicas: 3
 
 service:
   port: 8888
