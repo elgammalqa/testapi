@@ -11,11 +11,11 @@ Task is to build and deploy into k8s cluster a distributed web api application
 
 1. Build Docker image localy
     ```bash
-    docker image build --pull -t testapi:v1 .
+    docker image build --pull -t webapi:v1 .
     ```
 2. Run & test the image 
     ```bash
-    docker run --rm -it -p 5000:80 testapi:v1
+    docker run --rm -it -p 5000:80 webapi:v1
     ```
     ```bash
     curl http://localhost:5000/weatherforecast
@@ -33,45 +33,37 @@ Task is to build and deploy into k8s cluster a distributed web api application
     ```bash
     docker push yourhubusername/<repo name>
     ```
-4. Install via Helm
+4. create new namespace 
     ```bash
-    helm install testapirelease ./chart/
+    kubectl create ns ame
     ```
-    The Kubernetes deployment will use image [amirelgammal/testapi](https://hub.docker.com/r/amirelgammal/testapi) from Docker Hub.
 
-5.  Get kubernetes resorces 
+5. Install via Helm
+    ```bash
+    helm install -name webapi ./chart/
+    ```
+    The Kubernetes deployment will use image [amirelgammal/webapi] & [amirelgammal/nginx ](https://hub.docker.com/r/amirelgammal/ & (https://hub.docker.com/r/amirelgammal/nginx) from Docker Hub.
+
+6. change defualt name space 
+    ```bash
+    kubectl config set-context --current --namespace=ame
+    ```
+
+7.  Get kubernetes resorces 
 
     ```bash
     kubectl get all --selector app=testapi3core
     ```
-6. Port forward 
+8. Port forward 
     ```bash
     kubectl port-forward service/testapirelease-service 9999:8888
     ```
-7. Test the url
+9. Test the url
     ```bash
     curl http://localhost:9999/weatherforecast
     ```
-8. Install Nginx
     
-> Execute the commands from the Nginx folder.
 
-1. Create service pod 
-    ```bash
-    kubectl apply -f service.yaml
-    ```
-2. Create deployment pod
-    ```bash
-    kubectl apply -f deployment.yaml
-    ```
-3. Port forward 
-    ```bash
-    kubectl port-forward service/nginx 8181:80
-    ```
-4. Test Url
-    ```bash
-    curl http://localhost:8181/static.jsoncast
-    ```
 # Azure DevOps pipeline build
 
 ![alt text](https://docs.microsoft.com/en-us/dotnet/architecture/containerized-lifecycle/docker-devops-workflow/media/docker-workflow-ci-cd-aks.png)

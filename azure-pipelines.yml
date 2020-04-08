@@ -66,12 +66,16 @@ stages:
         targetPath: '$(Build.SourcesDirectory)/publish'
 
     - task: Docker@2
+      displayName: 'Push webapi image'
       inputs:
         containerRegistry: 'amirelgammal'
-        repository: 'amirelgammal/testapi'
+        repository: 'amirelgammal/webapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-<<<<<<< HEAD
-=======
-
->>>>>>> 41a02d2b9d6d6c50cefe7007249bd310052adb9c
+    - task: Docker@2
+      displayName: 'Push nginx image'
+      inputs:
+        containerRegistry: 'amirelgammal'
+        repository: 'amirelgammal/nginx'
+        command: 'buildAndPush'
+        Dockerfile: '**/nginx/Dockerfile'
