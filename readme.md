@@ -1,4 +1,4 @@
-Task is to build and deploy into k8s cluster a distributed web api application
+This to build and deploy into k8s cluster a distributed web api application
 
 # Prerequisites
 
